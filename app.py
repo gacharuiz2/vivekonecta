@@ -601,10 +601,10 @@ st.write('**ICP:Indice de correlación con el perfl**')
 ICP = st.slider(label="Cercano a cero significa mayor relación",min_value=-0.0,max_value=100.0,value=100.0,step=1.0)
 st.write('**IPR: Indice de probabilidad de rotacion temprana**')
 IPR = st.slider(label="Cercano a cero significa menor rotación",min_value=-0.0,max_value=1.0,value=1.0,step=0.1)
+st.write('**Variables adicionales de análisis**')
+cols = ['Edad','grado_formacion','estado_estudios','rubro_carrera','flag_ec','flag_eo','flag_se','estado_civil','genero','n_hijos','sueldo','ICP','IPR']
+st_ms = st.multiselect("borra y selecciona dos variables", cols)
 
-
-#	final= final[final['Score'] <= score]
-#	return(final)
 
 
 ##########################################################
@@ -627,20 +627,16 @@ def main():
 
 			st.write('Grafico de dispersión: %s' % len(result))
 			import altair as alt
-			c = alt.Chart(result.loc[:, ['IPR','ICP','sueldo','genero']]).mark_circle().properties(width = 750,height = 400,).encode(x='IPR', y='ICP', size='sueldo', color='genero', tooltip=['IPR', 'ICP', 'sueldo','genero'])
+			c = alt.Chart(result.loc[:, ['IPR','ICP',st_ms[0],st_ms[1]]]).mark_circle().properties(width = 750,height = 400,).encode(x='IPR', y='ICP', size=st_ms[0], color=st_ms[1], tooltip=['IPR', 'ICP', st_ms[0],st_ms[1]])
 			st.altair_chart(c)
 
 			st.write('Cantidad de postulantes encontrados: %s' % len(result))
-
-			#cols = ['id_postulante','numdoc','Edad','grado_formacion','estado_estudios','rubro_carrera','flag_ec','flag_eo','flag_se','estado_civil','genero','n_hijos','sueldo','ICP','IPR']
-			#st_ms = st.multiselect("Columns", list(result.index), ['id_postulante','ICP','IPR'])
-			#result = result.loc[st_ms]
 			st.dataframe(result)
 
 			df = pd.DataFrame(result)
 			csv = df.to_csv(index=False)
 			b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-			href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a> (right-click and save as &lt;some_name&gt;.csv)'
+			href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a> (Click derecho y guardalo &lt;nombre_de_tu_archivo&gt;.csv)'
 			st.markdown(href, unsafe_allow_html=True)
 
 
@@ -651,4 +647,3 @@ if __name__ == '__main__':
 st.text("-------------------------------------------------------------------------")
 st.text("Laboratorio de ciencia de datos")
 st.text("Konecta_Perú")  
-###--ejecutar C:\Users\LENOVO\PROYECTO_ML_API_STREAMLIT_RRHH>streamlit run app.py
