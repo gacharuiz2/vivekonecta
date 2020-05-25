@@ -627,9 +627,8 @@ def main():
 
 			st.write('Grafico de dispersión: %s' % len(result))
 			import altair as alt
-			c = alt.Chart(result.loc[:, ['IPR','ICP','sueldo','genero']]).mark_circle().encode(
-			x='IPR', y='ICP', size='sueldo', color='genero', tooltip=['IPR', 'ICP', 'sueldo','genero'])
-			st.altair_chart(c, use_container_width=True)
+			c = alt.Chart(result.loc[:, ['IPR','ICP','sueldo','genero']]).mark_circle().properties(width = 750,height = 400,).encode(x='IPR', y='ICP', size='sueldo', color='genero', tooltip=['IPR', 'ICP', 'sueldo','genero'])
+			st.altair_chart(c)
 
 			st.write('Cantidad de postulantes encontrados: %s' % len(result))
 
