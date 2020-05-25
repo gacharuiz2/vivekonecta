@@ -603,7 +603,7 @@ st.write('**IPR: Indice de probabilidad de rotacion temprana**')
 IPR = st.slider(label="Cercano a cero significa menor rotación",min_value=-0.0,max_value=1.0,value=1.0,step=0.1)
 st.write('**Variables adicionales de análisis**')
 cols = ['Edad','grado_formacion','estado_estudios','rubro_carrera','flag_ec','flag_eo','flag_se','estado_civil','genero','n_hijos','sueldo','ICP','IPR']
-st_ms = st.multiselect("borra y selecciona dos variables", cols)
+st_ms = st.multiselect("Selecciona solo dos variables", cols)
 
 
 
@@ -627,7 +627,7 @@ def main():
 
 			st.write('Grafico de dispersión: %s' % len(result))
 			import altair as alt
-			c = alt.Chart(result.loc[:, ['IPR','ICP',st_ms[0],st_ms[1]]]).mark_circle().properties(width = 750,height = 400,).encode(x='IPR', y='ICP', size=st_ms[0], color=st_ms[1], tooltip=['IPR', 'ICP', st_ms[0],st_ms[1]])
+				c = alt.Chart(result.loc[:, ['IPR','ICP',st_ms[0],st_ms[1]]]).mark_circle().properties(width = 500,height = 400,).encode(x='IPR', y='ICP', size=st_ms[0], color=st_ms[1], tooltip=['IPR', 'ICP', st_ms[0],st_ms[1]])
 			st.altair_chart(c)
 
 			st.write('Cantidad de postulantes encontrados: %s' % len(result))
