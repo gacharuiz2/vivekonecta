@@ -1,17 +1,13 @@
 ### para algoritmo
 import streamlit as st
-import joblib
-import time
 from PIL import Image
-import numpy as np
 import pandas as pd
 from pandas import DataFrame
 import json
 from firebase import firebase
-from datetime import datetime
 import datetime
-from datetime import date
 from datetime import datetime
+from datetime import date
 import base64
 import os
 os.environ['NUMEXPR_MAX_THREADS'] = '16'
