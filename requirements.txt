@@ -6,4 +6,5 @@ firebase==3.0.1
 pybase64== 1.0.1
 pipwin==0.4.9
 DateTime==4.3
+python-jwt==3.2.6
 
